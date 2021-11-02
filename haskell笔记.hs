@@ -38,7 +38,31 @@ snd ("Wow", False) 返回尾项 False  注意这两种只能用于大小为2的t
 zip [1 .. 5] ["one", "two", "three", "four", "five"] 得到 交叉组装 [(1,"one"),(2,"two"),(3,"three"),(4,"four"),(5,"five")]
 
 
+ch03 Types and Typeclasses
 
+:t "HELLO!"  显示类型  "HELLO!" :: [Char]
+Int 32位  Integer 无界 Double
+factorial 50 阶乘
+circumference 4.0 得到 圆周长 25.132742
+Typeclass:
+Eq 包含可判斷相等性的型別。提供實現的函數是 == 和 /=。
+Ord 包含可比較大小的型別
+型別若要成為Ord的成員，必先加入Eq家族。
+"Abrakadabra" `compare` "Zebra" 得到 LT   ，compare函数返回LT或GT或EQ
+show 5.334 转换为字符串 "5.334"
+read "[1,2,3,4]" ++ [3] 与show相反，++好像是连接？ [1,2,3,4,3]。用后面的东西来判断转成什么类型
+read "[1,2,3,4]" :: [Int] 显式说明类型得到 [1,2,3,4] 
+=> 符號。它左邊的部分叫做型別約束。
+succ 'B' 得到 'C'
+Enum 的成員都是連續的型別 -- 也就是可枚舉。Enum 類存在的主要好處就在於我們可以在 Range 中用到它的成員型別：每個值都有後繼子 (successer) 和前置子 (predecesor)，分別可以通過 succ 函數和 pred 函數得到
+Bounded 的成員都有一個上限和下限。minBound :: Int 得到 -2147483648
+如果其中的項都屬於 Bounded Typeclass，那麼該 Tuple 也屬於 Bounded
+:t 20 得到 20 :: (Num t) => t
+:t (*) 得到 (*) :: (Num a) => a -> a -> a
+Num 包含所有的數字：實數和整數
+Integral 僅包含整數，其中的成員型別有 Int 和 Integer
+Floating 僅包含浮點型別：Float 和 Double
+fromIntegral 函数其型別聲明為： fromIntegral :: (Num b, Integral a) => a -> b，用来把Integral转换为更通用的形式
 
 
 
