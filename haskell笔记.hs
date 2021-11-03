@@ -65,4 +65,36 @@ Floating 僅包含浮點型別：Float 和 Double
 fromIntegral 函数其型別聲明為： fromIntegral :: (Num b, Integral a) => a -> b，用来把Integral转换为更通用的形式
 
 
+模式匹配，保留整体引用
+capital :: String -> String  
+capital "" = "Empty string, whoops!"  
+capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
 
+let 定义局部函数
+[let square x = x * x in (square 5, square 3, square 2)]  
+[(25,9,4)]
+
+(let a = 100; b = 200; c = 300 in a*b*c, let foo="Hey "; bar = "there!" in foo ++ bar)  
+(6000000,"Hey there!")
+
+calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2]
+
+foldl foldr foldl1
+scanl scanr scanl1
+scanl (+) 0 [3,5,2,1] 得到 [0,3,8,10,11] 
+scanr (+) 0 [3,5,2,1] 得到 [11,8,3,1,0]
+
+$ 降低优先级
+
+. 函数结合
+map (negate . abs) [5,-3,-6,7,-3,2,-19,24]  
+[-5,-3,-6,-7,-3,-2,-19,-24]
+
+
+ghci 中装载模组
+:m Data.List Data.Map Data.Set
+
+import Data.List (nub，sort)
+import Data.List hiding (nub)
+import qualified Data.Map as M
+import qualified Data.Set as Set
