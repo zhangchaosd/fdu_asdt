@@ -5,7 +5,7 @@ main = do
   str <- getLine
   let ret = sum [1|x<-str,x=='x']
   let str2 = ["xo.","xo."]
-  let ret2 = all (all (\c->c=='x'||c=='o'||c=='.')) str2
+  let ret2 = sum $ map (countLetters 'x') str2
   print ret
   return ()
 
@@ -14,6 +14,7 @@ main = do
 
 
 
+countLetters c str= sum [1 | x <- str, x == c]
 
 
 

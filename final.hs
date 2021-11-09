@@ -7,28 +7,38 @@ main = do
     let examplePosition = ["o..", "x.o", ".xo"]
     mapM_ putStrLn examplePosition
     putStrLn "Now please input yours:"
-    --inputposition <- Monad.replicateM 3 getLine
-    let inputposition = ["...","...","..."]-- todelete
+    inputPosition <- Monad.replicateM 3 getLine
     -- TODO 检查 inputposition 合法性，两层all 相差不超过1，已经胜利或者输了，是否下满
 
     -- assert len == 3
-    let len = length inputposition
+    let len = length inputPosition
     -- assert len2 == True
-    let len2 = all ((==3) . length) inputposition
+    let len2 = all ((==3) . length) inputPosition
     -- asser ele == True  检查元素是否是 'x'，'o'，'.'
-    let ele = all (all (\c->c=='x'||c=='o'||c=='.')) inputposition
-    
-    putStrLn "Now please tell me you are 'x' or 'o':"
-    --piece <- getLine
-    let piece = "x" -- todelete
-    putStrLn $ if piece /="o" && piece /= "x" then "What?" else "ok"
+    let ele = all (all (\c->c=='x'||c=='o'||c=='.')) inputPosition
+    -- 统计三种字符的数量 assert xcount + ocount + dotcount == 9
+    let xcount = sum $ map (countLetters 'x') inputPosition
+    let ocount = sum $ map (countLetters 'o') inputPosition
+    let dotcount = sum $ map (countLetters '.') inputPosition
+    -- 判断是否已经有人胜出
+    let xwin = iswin inputPosition "xxx"
+    let owin = iswin inputPosition "ooo"
+
+    putStrLn "Now tell me if you are 'x' or 'o':"
+    piece <- getLine
+
+    let legalInput = all (==True) [len == 3, len2, ele, not xwin, not owin, piece=="x" || piece=="o", abs xcount - ocount < 2]
+    putStrLn (if legalInput then "Let me tell you something about the future..." else "Reboot please, before the machine break down.")
+
+    -- 默认 x 先下
+    let xturn = xcount <= ocount
+    let oturn = xcount > ocount
 
     -- 始终站在 x 的角度
-    let curposition = if piece == "o" then excxo inputposition else inputposition
-    mapM_ putStrLn curposition
-    showresult $ static 'x' curposition
+    let curPosition = if piece == "o" then excxo inputPosition else inputPosition
+    showresult $ static (if xturn then 'x' else 'o') curPosition
     return ()
-
+-------------------------------------------------------------------------
 -- 核心逻辑
 static :: (Eq p, Num p) => Char -> [[Char]] -> p
 static c [] = 0
@@ -39,8 +49,9 @@ static c curposition
     | otherwise  = - 1
     where results = map (static $ if c == 'x' then 'o' else 'x') $ getnexts curposition c
 
-countLetters str c = sum [1 | x <- str, x == c]
-countLetters2 str c = length $ filter (== c) str
+-- 统计 String 中某个字符的数量。这里有个问题，似乎 c 必须放在 str 前面才能用 map 调用？
+countLetters :: (Num a1, Eq a2) => a2 -> [a2] -> a1
+countLetters c str = sum [1 | x <- str, x == c]
 
 -- 筛选掉无意义的走法
 getnexts :: [String] -> Char -> [[String]]
@@ -54,10 +65,10 @@ getpss curposition c row col
 
 --done
 showresult :: (Eq a, Num a) => a -> IO ()
-showresult score = case score of 1 -> putStrLn "You will win!!!!!!!!!"
+showresult score = case score of 1 -> putStrLn "It shows that you will win, there must be something wrong"
                                  0 -> putStrLn "No one can win"
-                                 - 1 -> putStrLn "You are lost"
-                                 _ -> putStrLn "We have a big big problem"
+                                 - 1 -> putStrLn "Go out, take a cup of tea and donot play this game again"
+                                 _ -> putStrLn "Houston, we have a problem"
 
 -- 检查是否有人获胜
 iswin :: Eq a => [[a]] -> [a] -> Bool
@@ -75,7 +86,7 @@ getRowsAndCols curposition = let ct = List.transpose curposition
 excxo :: [String] -> [String]
 excxo = map (\str -> [if c=='x' then 'o' else if c=='o' then 'x' else c | c <- str])
 
--- 修改二维列表中的值，仅限 3 x 3
+-- 修改二维列表中的值，仅限 3 x 3。注意只在 '.' 处下子
 changev (l1:l2:l3:_) h v c
                 | h == 0 = [cg2 l1 v, l2, l3]
                 | h == 1 = [l1, cg2 l2 v, l3]
@@ -86,7 +97,7 @@ changev (l1:l2:l3:_) h v c
                         |v == 2 = [e1, e2, if e3 == '.' then c else e3]
 
 
--- 修改二维列表里的值，比 上面的方法少了对 '.' 的判断，不能用
+-- 修改二维列表里的值，比上面的方法少了对 '.' 的判断，不能用
 changeElem :: [String] -> Int -> Int -> Char -> [String]
 changeElem xs row col x = 
     let row_to_replace_in = xs !! row
