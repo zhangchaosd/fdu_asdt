@@ -2,16 +2,17 @@ import qualified  Data.List as List
 import qualified Control.Monad as Monad
 
 main = do 
-  str <- getLine
-  let ret = sum [1|x<-str,x=='x']
-  let str2 = ["xo.","xo."]
-  let ret2 = sum $ map (countLetters 'x') str2
+  let sz = ["123","456","789"]
+  let ret = diagonal sz
+  let ret2 = diagonal $ List.reverse sz
+
   print ret
+  print ret2
   return ()
 
 
 
-
+diagonal xs = zipWith (!!) xs [0..]
 
 
 countLetters c str= sum [1 | x <- str, x == c]

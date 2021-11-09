@@ -8,7 +8,6 @@ main = do
     mapM_ putStrLn examplePosition
     putStrLn "Now please input yours:"
     inputPosition <- Monad.replicateM 3 getLine
-    -- TODO 检查 inputposition 合法性，两层all 相差不超过1，已经胜利或者输了，是否下满
 
     -- assert len == 3
     let len = length inputPosition
@@ -59,28 +58,34 @@ getnexts curposition c = let pss = getpss curposition c 2 2
                          in [ps | ps <- pss, ps /= curposition]
 
 -- 尝试在每个位置走一步
+getpss :: (Eq t1, Num t1, Num t2, Ord t2) => [String] -> Char -> t1 -> t2 -> [[String]]
 getpss curposition c row col
     | row == -1 = []
     | otherwise  = changev curposition row col c :getpss curposition c (if col-1<0 then row-1 else row) (if col-1<0 then 2 else col-1)
 
 --done
 showresult :: (Eq a, Num a) => a -> IO ()
-showresult score = putStrLn $ case score of 1 -> "It shows that you will win, there must be something wrong"
-                                            0 -> "No one can win"
-                                            -1 -> "Go out and do not play this game again"
-                                            _ -> "Houston, we have a problem"
+showresult score =
+    putStrLn $ case score of 1 -> "It shows that you will win, there must be something wrong"
+                             0 -> "No one can win"
+                             -1 -> "Go out and do not play this game again"
+                             _ -> "Houston, we have a problem"
 
 -- 检查是否有人获胜
 iswin :: Eq a => [[a]] -> [a] -> Bool
-iswin curposition xxx_Or_ooo = let ls = getRowsAndCols curposition
-                    in elem xxx_Or_ooo ls
+iswin curposition xxx_Or_ooo =
+    let ls = getRowsAndCols curposition
+    in elem xxx_Or_ooo ls
 
 -- to opt 取出每一行每一列和两条对角线，用于检查是否有人获胜
 getRowsAndCols :: [[a]] -> [[a]]
-getRowsAndCols curposition = let ct = List.transpose curposition
-                    in [curposition !! 0, curposition !! 1, curposition !! 2,
-                        ct !! 0, ct !! 1, ct !! 2,
-                        ct !! 0 !! 0 : ct !! 1 !! 1 : [ct !! 2 !! 2], ct !! 2 !! 0 : ct !! 1 !! 1 : [ct !! 0 !! 2]]
+getRowsAndCols curposition =
+    let ct = List.transpose curposition
+    in [curposition !! 0, curposition !! 1, curposition !! 2, ct !! 0, ct !! 1, ct !! 2, diagonal ct, diagonal $ List.reverse ct]
+
+-- 取对角线元素
+diagonal :: [[c]] -> [c]
+diagonal xs = zipWith (!!) xs [0..]
 
 -- 交换 x 和 o
 excxo :: [String] -> [String]
