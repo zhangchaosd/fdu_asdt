@@ -67,7 +67,7 @@ getpss curposition c row col
 showresult :: (Eq a, Num a) => a -> IO ()
 showresult score = case score of 1 -> putStrLn "It shows that you will win, there must be something wrong"
                                  0 -> putStrLn "No one can win"
-                                 - 1 -> putStrLn "Go out, take a cup of tea and donot play this game again"
+                                 - 1 -> putStrLn "Go out and do not play this game again"
                                  _ -> putStrLn "Houston, we have a problem"
 
 -- 检查是否有人获胜
