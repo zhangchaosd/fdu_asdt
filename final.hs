@@ -65,10 +65,10 @@ getpss curposition c row col
 
 --done
 showresult :: (Eq a, Num a) => a -> IO ()
-showresult score = case score of 1 -> putStrLn "It shows that you will win, there must be something wrong"
-                                 0 -> putStrLn "No one can win"
-                                 - 1 -> putStrLn "Go out and do not play this game again"
-                                 _ -> putStrLn "Houston, we have a problem"
+showresult score = putStrLn $ case score of 1 -> "It shows that you will win, there must be something wrong"
+                                            0 -> "No one can win"
+                                            -1 -> "Go out and do not play this game again"
+                                            _ -> "Houston, we have a problem"
 
 -- 检查是否有人获胜
 iswin :: Eq a => [[a]] -> [a] -> Bool
