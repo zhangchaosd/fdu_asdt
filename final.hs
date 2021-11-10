@@ -9,7 +9,7 @@ main = do
     putStrLn "Now please input yours:"
     inputPosition <- Monad.replicateM 3 getLine
 
-    -- assert len == 3
+    -- assert len == 3，这个一定成立，可以去掉
     let len = length inputPosition
     -- assert len2 == True
     let len2 = all ((==3) . length) inputPosition
@@ -29,13 +29,11 @@ main = do
     let legalInput = all (==True) [len == 3, len2, ele, not xwin, not owin, piece=="x" || piece=="o", abs xcount - ocount < 2]
     putStrLn (if legalInput then "Let me tell you something about the future..." else "Reboot please, before the machine break down.")
 
-    -- 默认 x 先下
-    let xturn = xcount <= ocount
-    let oturn = xcount > ocount
-
     -- 始终站在 x 的角度
     let curPosition = if piece == "o" then excxo inputPosition else inputPosition
-    showresult $ static (if xturn then 'x' else 'o') curPosition
+    -- 默认 x 先下
+    let ourturn = (piece == "x" && xcount <= ocount) || (piece == "o" && ocount < xcount)
+    showresult $ (if ourturn then 1 else (-1)) * static (if ourturn then 'x' else 'o') curPosition
     return ()
 -------------------------------------------------------------------------
 -- 核心逻辑
@@ -88,10 +86,11 @@ diagonal :: [[c]] -> [c]
 diagonal xs = zipWith (!!) xs [0..]
 
 -- 交换 x 和 o
-excxo :: [String] -> [String]
+excxo :: [[Char]] -> [[Char]]
 excxo = map (\str -> [if c=='x' then 'o' else if c=='o' then 'x' else c | c <- str])
 
 -- 修改二维列表中的值，仅限 3 x 3。注意只在 '.' 处下子
+changev :: (Eq a1, Eq a2, Num a1, Num a2) => [[Char]] -> a1 -> a2 -> Char -> [[Char]]
 changev (l1:l2:l3:_) h v c
                 | h == 0 = [cg2 l1 v, l2, l3]
                 | h == 1 = [l1, cg2 l2 v, l3]
@@ -102,8 +101,8 @@ changev (l1:l2:l3:_) h v c
                         |v == 2 = [e1, e2, if e3 == '.' then c else e3]
 
 
--- 修改二维列表里的值，比上面的方法少了对 '.' 的判断，不能用
-changeElem :: [String] -> Int -> Int -> Char -> [String]
+-- 修改二维列表里的值，比上面的方法少了对 '.' 的判断，仅展示，不使用
+changeElem :: [[p]] -> Int -> Int -> p -> [[p]]
 changeElem xs row col x = 
     let row_to_replace_in = xs !! row
         modified_row = replace col x row_to_replace_in
