@@ -3,7 +3,7 @@ package com.zhangchao.task.controller;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.zhangchao.task.entity.Task;
-import com.zhangchao.task.entity.Result;
+// import com.zhangchao.task.entity.Result;
 import com.zhangchao.task.service.TaskService;
 
 import javax.annotation.Resource;
