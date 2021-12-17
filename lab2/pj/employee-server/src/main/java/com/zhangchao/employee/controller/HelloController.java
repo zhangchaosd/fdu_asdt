@@ -1,24 +1,24 @@
-package top.xywu.student.controller;
+package com.zhangchao.employee.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import top.xywu.student.config.StudentProperties;
+import com.zhangchao.employee.config.EmployeeProperties;
 
 import javax.annotation.Resource;
 
 /**
- * @author xywu
+ * @author zhangchao
  * @date 2021/02/07
  */
 @RestController
 public class HelloController {
 
     @Resource
-    private StudentProperties studentProperties;
+    private EmployeeProperties employeeProperties;
 
     @GetMapping(value = "/hello")
     public String hello() {
-        return "age: " + studentProperties.getAge() + " grade: " + studentProperties.getGrade();
+        return "age: " + employeeProperties.getAge() + " grade: " + employeeProperties.getGrade();
     }
 
     @RequestMapping(value = "/{age}/say/{username}", method = RequestMethod.GET)

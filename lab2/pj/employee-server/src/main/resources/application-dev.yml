@@ -11,6 +11,6 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-student:
+employee:
   grade: B
   age: 15

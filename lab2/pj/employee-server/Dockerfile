@@ -1,5 +1,5 @@
-FROM registry.cn-hangzhou.aliyuncs.com/xywu/openjdk:8-jre-slim
-COPY target/student-0.0.1-SNAPSHOT.jar /app/app.jar
+FROM registry.cn-hangzhou.aliyuncs.com/zhangchao/openjdk:8-jre-slim
+COPY target/employee-0.0.1-SNAPSHOT.jar /app/app.jar
 
 ENV LANG C.UTF-8
 

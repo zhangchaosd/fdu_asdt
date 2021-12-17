@@ -1,4 +1,4 @@
-package top.xywu.student.aspect;
+package com.zhangchao.employee.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -12,14 +12,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author xywu
+ * @author zhangchao
  * @date 2021/10/18
  */
 @Aspect
 @Component
 public class UserVerifyAspect {
-    @Pointcut("execution(public * top.xywu.student.controller.*.*(..))" +
-            "&& !execution(public * top.xywu.student.controller.HelloController.say(..))")
+    @Pointcut("execution(public * com.zhangchao.employee.controller.*.*(..))" +
+            "&& !execution(public * com.zhangchao.employee.controller.HelloController.say(..))")
     public void verify() {
     }
 

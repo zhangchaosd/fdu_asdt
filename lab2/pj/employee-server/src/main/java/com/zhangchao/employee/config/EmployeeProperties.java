@@ -1,15 +1,15 @@
-package top.xywu.student.config;
+package com.zhangchao.employee.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @author xywu
+ * @author zhangchao
  * @date 2021/02/15
  */
 @Component
-@ConfigurationProperties(prefix = "student")
-public class StudentProperties {
+@ConfigurationProperties(prefix = "employee")
+public class EmployeeProperties {
     private String grade;
     private Integer age;
 

@@ -1,15 +1,15 @@
-package top.xywu.student.entity;
+package com.zhangchao.employee.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * @author xywu
+ * @author zhangchao
  * @date 2021/03/06
  */
 @Entity
-public class Student {
+public class Employee {
     @Id
     @GeneratedValue
     private Integer id;
@@ -18,7 +18,7 @@ public class Student {
     private String phone;
 
     // 第三：自动加入空构造方法，加入get，set方法
-    public Student() {
+    public Employee() {
     }
 
     public Integer getId() {
