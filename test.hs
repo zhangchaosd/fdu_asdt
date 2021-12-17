@@ -1,5 +1,6 @@
 import qualified  Data.List as List
 import qualified Control.Monad as Monad
+import Types
 
 main = do 
   let sz = ["123","456","789"]
@@ -7,7 +8,7 @@ main = do
   let ret2 = diagonal $ List.reverse sz
 
   print ret
-  print ret2
+  print standard52
   return ()
 
 

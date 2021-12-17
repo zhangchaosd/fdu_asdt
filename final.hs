@@ -7,6 +7,7 @@ main = do
     let examplePosition = ["o..", "x.o", ".xo"]
     mapM_ putStrLn examplePosition
     putStrLn "Now please input yours:"
+    -- 获取三行输入
     inputPosition <- Monad.replicateM 3 getLine
 
     -- assert len == 3，这个一定成立，可以去掉
@@ -101,7 +102,7 @@ changev (l1:l2:l3:_) h v c
                         |v == 2 = [e1, e2, if e3 == '.' then c else e3]
 
 
--- 修改二维列表里的值，比上面的方法少了对 '.' 的判断，仅展示，不使用
+-- 修改二维列表里的值，比上面的方法少了对 '.' 的判断，没有使用
 changeElem :: [[p]] -> Int -> Int -> p -> [[p]]
 changeElem xs row col x = 
     let row_to_replace_in = xs !! row
