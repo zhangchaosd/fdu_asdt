@@ -1,11 +1,11 @@
 package com.zhangchao.employee;
 
-import org.springframework.boot.CommandLineRunner;
+// import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Bean;
 // import com.zhangchao.employee.entity.Employee;
-import com.zhangchao.employee.repository.EmployeeRepository;
+// import com.zhangchao.employee.repository.EmployeeRepository;
 
 // import java.util.List;
 
