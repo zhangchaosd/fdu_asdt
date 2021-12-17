@@ -1,0 +1,37 @@
+version: "3"
+services:
+  mysql5:
+    build: mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    networks:
+      - mynetwork
+
+  student-server:
+    depends_on:
+      - mysql5
+    build: student-server/
+    restart: always
+    environment:
+      USERNAME: root
+      PASSWORD: password
+      DB_URL: mysql5:3306/student
+    ports:
+      - 9999:9999
+    networks:
+      - mynetwork
+
+  frontend:
+    depends_on:
+      - student-server
+    build: frontend/
+    restart: always
+    ports:
+      - 1024:80
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork: {}
