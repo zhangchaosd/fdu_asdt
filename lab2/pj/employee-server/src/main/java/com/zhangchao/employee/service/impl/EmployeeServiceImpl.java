@@ -1,7 +1,7 @@
 package com.zhangchao.employee.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.zhangchao.employee.entity.Employee;
 import com.zhangchao.employee.repository.EmployeeRepository;
@@ -9,10 +9,11 @@ import com.zhangchao.employee.service.EmployeeService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author zhangchao
- * @date 2021/03/29
+ * @date 2021/12/17
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -25,7 +26,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee findById(Integer id) {
+        Optional<Employee> e = employeeRepository.findById(id);
+        if(e.isPresent()){
+            return e.get();
+        }
+        Employee bad = new Employee();
+        bad.setId(-1);
+        return bad;
+    }
+
+    @Override
+    public List<Employee> findByName(String name) {
+        return employeeRepository.findEmployeeByName(name);
+    }
+
+    @Override
+    public List<Employee> findByDepartment(String department) {
+        return employeeRepository.findEmployeeByDepartment(department);
+    }
+
+    @Override
     public Employee save(Employee employee) {
+        //TODO Send register msg
+        return employeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee update(Employee employee) {
+        //TODO Send update msg
         return employeeRepository.save(employee);
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 
 /**
  * @author zhangchao
- * @date 2021/03/06
+ * @date 2021/12/17
  */
 @Entity
 public class Employee {
@@ -14,10 +14,9 @@ public class Employee {
     @GeneratedValue
     private Integer id;
 
-    private String username;
-    private String phone;
+    private String name;
+    private String department;
 
-    // 第三：自动加入空构造方法，加入get，set方法
     public Employee() {
     }
 
@@ -29,19 +28,19 @@ public class Employee {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

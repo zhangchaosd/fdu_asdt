@@ -6,9 +6,13 @@ import java.util.List;
 
 /**
  * @author zhangchao
- * @date 2021/03/29
+ * @date 2021/12/17
  */
 public interface EmployeeService {
     List<Employee> findAll();
+    Employee findById(Integer id);
+    List<Employee> findByName(String name);
+    List<Employee> findByDepartment(String name);
     Employee save(Employee employee);
+    Employee update(Employee employee);
 }

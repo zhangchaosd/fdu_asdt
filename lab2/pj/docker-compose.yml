@@ -1,23 +1,23 @@
 version: "3"
 services:
   mysql5:
-    build: mysql/
+    build: mysql_employee/
     environment:
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - 3306:3306
+      - 3307:3307
     networks:
       - mynetwork
 
-  student-server:
+  employee-server:
     depends_on:
       - mysql5
-    build: student-server/
+    build: employee-server/
     restart: always
     environment:
       USERNAME: root
       PASSWORD: password
-      DB_URL: mysql5:3306/student
+      DB_URL: mysql5:3306/employee
     ports:
       - 9999:9999
     networks:

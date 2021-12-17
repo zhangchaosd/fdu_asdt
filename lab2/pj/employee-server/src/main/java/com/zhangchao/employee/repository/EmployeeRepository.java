@@ -8,9 +8,11 @@ import java.util.List;
 
 /**
  * @author zhangchao
- * @date 2021/03/29
+ * @date 2021/12/17
  */
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    List<Employee> findEmployeeByUsername(String username);
+    Employee findEmployeeById(Integer id);
+    List<Employee> findEmployeeByName(String name);
+    List<Employee> findEmployeeByDepartment(String department);
 }
