@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3308/sys?useSSL=false&useUnicode=true&characterEncoding=utf-8
-    taskname: root
+    url: jdbc:mysql://localhost:3309/sys?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: root
     password: password
   jpa:
     hibernate:

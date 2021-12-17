@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://${DB_URL}?useSSL=false&useUnicode=true&characterEncoding=utf-8
-    taskname: ${USERNAME}
+    username: ${USERNAME}
     password: ${PASSWORD}
   jpa:
     hibernate:
