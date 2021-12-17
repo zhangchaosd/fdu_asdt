@@ -49,7 +49,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task complete(Task task) {
-        task.setComplete(true);
+        task.setCompleted(true);
         return taskRepository.save(task);
     }
 }

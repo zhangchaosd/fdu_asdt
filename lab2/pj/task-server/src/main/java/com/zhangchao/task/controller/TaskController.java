@@ -20,17 +20,17 @@ public class TaskController {
     TaskService taskService;
 
     @PostMapping(value = "/gettasksbyuserid")
-    public Result getTasksByUserid(@RequestBody Task task) {
+    public List<Task> getTasksByUserid(@RequestBody Task task) {
         return taskService.findByUserid(task.getUserid());
     }
 
     @PostMapping(value = "/gettasksbycategory")
-    public Result getTasksByCategory(@RequestBody Task task) {
+    public List<Task> getTasksByCategory(@RequestBody Task task) {
         return taskService.findByCategory(task.getCategory());
     }
 
     @PostMapping(value = "/gettasksbyuseridandcategory")
-    public Result getTasksByUseridAndCategory(@RequestBody Task task) {
+    public List<Task> getTasksByUseridAndCategory(@RequestBody Task task) {
         return taskService.findByUseridAndCategory(task.getUserid(), task.getUserid());
     }
 

@@ -36,7 +36,7 @@ public class Task {
         this.userid = userid;
     }
 
-    public boolean getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
