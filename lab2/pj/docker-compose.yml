@@ -23,51 +23,51 @@ services:
     networks:
       - mynetwork
 
-  mysql5-user:
-    build: mysql_user/
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-    ports:
-      - 3308:3308
-    networks:
-      - mynetwork
+  # mysql5-user:
+  #   build: mysql_user/
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #   ports:
+  #     - 3308:3308
+  #   networks:
+  #     - mynetwork
 
-  user-server:
-    depends_on:
-      - mysql5-user
-    build: user-server/
-    restart: always
-    environment:
-      USERNAME: root
-      PASSWORD: password
-      DB_URL: mysql5-user:3306/user
-    ports:
-      - 9998:9998
-    networks:
-      - mynetwork
+  # user-server:
+  #   depends_on:
+  #     - mysql5-user
+  #   build: user-server/
+  #   restart: always
+  #   environment:
+  #     USERNAME: root
+  #     PASSWORD: password
+  #     DB_URL: mysql5-user:3306/user
+  #   ports:
+  #     - 9998:9998
+  #   networks:
+  #     - mynetwork
 
-  mysql5-task:
-    build: mysql_task/
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-    ports:
-      - 3309:3309
-    networks:
-      - mynetwork
+  # mysql5-task:
+  #   build: mysql_task/
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #   ports:
+  #     - 3309:3309
+  #   networks:
+  #     - mynetwork
 
-  task-server:
-    depends_on:
-      - mysql5-task
-    build: task-server/
-    restart: always
-    environment:
-      USERNAME: root
-      PASSWORD: password
-      DB_URL: mysql5-task:3306/task
-    ports:
-      - 9997:9997
-    networks:
-      - mynetwork
+  # task-server:
+  #   depends_on:
+  #     - mysql5-task
+  #   build: task-server/
+  #   restart: always
+  #   environment:
+  #     USERNAME: root
+  #     PASSWORD: password
+  #     DB_URL: mysql5-task:3306/task
+  #   ports:
+  #     - 9997:9997
+  #   networks:
+  #     - mynetwork
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -104,6 +104,17 @@ services:
       ZK_HOSTS: zookeeper:2181
       APPLICATION_SECRET: letmein
       KM_ARGS: -Djava.net.preferIPv4Stack=true
+    networks:
+      - mynetwork
+
+  taskcompletion-server:
+    depends_on:
+      - employee-server
+      - task-server
+    build: taskCompletion-server/
+    restart: always
+    ports:
+      - 9996:9996
     networks:
       - mynetwork
 

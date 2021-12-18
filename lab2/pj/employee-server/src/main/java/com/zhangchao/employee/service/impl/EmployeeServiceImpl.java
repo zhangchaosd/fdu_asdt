@@ -53,11 +53,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee save(Employee employee) {
         kafkaTemplate.send("newEmployee", Integer.toString(employee.getId()));
+        //kafkaTemplate.send("departmentIncrease", employee.getDepartment());
         return employeeRepository.save(employee);
     }
 
     @Override
     public Employee update(Employee employee) {
+        //Employee oldemployee = findById(employee.getId());
+        //kafkaTemplate.send("departmentIncrease", employee.getDepartment());
+        //kafkaTemplate.send("departmentDecrease", oldemployee.getDepartment());
         return employeeRepository.save(employee);
     }
 }

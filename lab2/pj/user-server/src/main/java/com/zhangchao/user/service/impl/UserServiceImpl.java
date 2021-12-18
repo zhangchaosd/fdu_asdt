@@ -47,6 +47,9 @@ public class UserServiceImpl implements UserService {
         user.setId(Integer.parseInt(id));
         user.setPassword(getPsw(8));
         //TODO send EMAIL
+        System.out.println("工号和密码:");
+        System.out.println(Integer.toString(user.getId()));
+        System.out.println(user.getPassword());
         return userRepository.save(user);
     }
 

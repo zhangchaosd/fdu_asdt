@@ -17,23 +17,8 @@ public class TaskCompletionController {
     @Resource
     TaskCompletionService taskCompletionService;
 
-    @PostMapping(value = "/gettaskCompletionsbyuserid")
-    public List<TaskCompletion> getTaskCompletionsByUserid(@RequestBody TaskCompletion taskCompletion) {
-        return taskCompletionService.findByUserid(taskCompletion.getUserid());
-    }
-
-    @PostMapping(value = "/gettaskCompletionsbycategory")
-    public List<TaskCompletion> getTaskCompletionsByCategory(@RequestBody TaskCompletion taskCompletion) {
-        return taskCompletionService.findByCategory(taskCompletion.getCategory());
-    }
-
-    @PostMapping(value = "/gettaskCompletionsbyuseridandcategory")
-    public List<TaskCompletion> getTaskCompletionsByUseridAndCategory(@RequestBody TaskCompletion taskCompletion) {
-        return taskCompletionService.findByUseridAndCategory(taskCompletion.getUserid(), taskCompletion.getUserid());
-    }
-
-    @GetMapping(value = "/taskCompletions") //TODO delete
-    public List<TaskCompletion> findAll() {
-        return taskCompletionService.findAll(); //only for test
+    @GetMapping(value = "/gettaskcompletions")
+    public List<TaskCompletion> getTaskCompletions() {
+        return taskCompletionService.getTaskCompletions();
     }
 }
