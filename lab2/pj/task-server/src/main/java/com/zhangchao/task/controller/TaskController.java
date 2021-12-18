@@ -1,9 +1,7 @@
 package com.zhangchao.task.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.zhangchao.task.entity.Task;
-// import com.zhangchao.task.entity.Result;
 import com.zhangchao.task.service.TaskService;
 
 import javax.annotation.Resource;
@@ -32,18 +30,6 @@ public class TaskController {
     @PostMapping(value = "/gettasksbyuseridandcategory")
     public List<Task> getTasksByUseridAndCategory(@RequestBody Task task) {
         return taskService.findByUseridAndCategory(task.getUserid(), task.getUserid());
-    }
-
-    @PostMapping(value = "/completetask")
-    public Task completeTask(@RequestBody Task task) {
-        // TODO callback
-        return taskService.complete(task);
-    }
-
-    @PostMapping(value = "/test1")
-    public Task addNew(@RequestBody Task task) {
-        // TODO callback
-        return taskService.save(task);
     }
 
     @GetMapping(value = "/tasks") //TODO delete

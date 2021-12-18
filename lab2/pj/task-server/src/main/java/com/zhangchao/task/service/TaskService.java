@@ -14,6 +14,6 @@ public interface TaskService {
     List<Task> findByUserid(Integer userid);
     List<Task> findByCategory(Integer category);
     List<Task> findByUseridAndCategory(Integer userid, Integer category);
-    Task save(Task task);
-    Task complete(Task task);
+    Task save(String userid);
+    Task complete(String userid, Integer category);
 }

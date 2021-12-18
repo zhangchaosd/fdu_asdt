@@ -42,13 +42,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task save(Task task) {
-        //TODO Send new task msg
+    public Task save(String userid) {
+        Task task = new Task();
+        task.setUserid(Integer.parseInt(userid));
+        task.setCategory(1);
+        task.setCompleted(false);
         return taskRepository.save(task);
     }
 
     @Override
-    public Task complete(Task task) {
+    public Task complete(String userid, Integer category) {
+        List<Task>tasks = taskRepository.findTaskByUseridAndCategory(Integer.parseInt(userid), category);
+        Task task = tasks.get(0);
         task.setCompleted(true);
         return taskRepository.save(task);
     }

@@ -1,7 +1,8 @@
 package com.zhangchao.employee.service.impl;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Component;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import com.zhangchao.employee.entity.Employee;
 import com.zhangchao.employee.repository.EmployeeRepository;
@@ -19,6 +20,9 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
     @Resource
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @Override
     public List<Employee> findAll() {
@@ -48,13 +52,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee save(Employee employee) {
-        //TODO Send register msg
+        kafkaTemplate.send("newEmployee", Integer.toString(employee.getId()));
         return employeeRepository.save(employee);
     }
 
     @Override
     public Employee update(Employee employee) {
-        //TODO Send update msg
         return employeeRepository.save(employee);
     }
 }

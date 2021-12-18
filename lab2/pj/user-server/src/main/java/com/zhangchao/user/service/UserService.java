@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
     User findById(Integer id);
-    User save(User user);
+    User save(String id);
     User update(User user);
 
     Result login(User user);

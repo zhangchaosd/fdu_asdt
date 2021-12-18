@@ -1,7 +1,8 @@
 package com.zhangchao.task.entity;
 
 import javax.persistence.Entity;
-// import javax.persistence.GeneratedValue;
+import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import javax.persistence.Id;
 
 /**
@@ -20,6 +21,8 @@ public class Task {
     public Task() {
     }
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     public Integer getTaskid() {
         return taskid;
     }

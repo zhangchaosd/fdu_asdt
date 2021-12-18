@@ -1,6 +1,5 @@
 package com.zhangchao.employee.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.zhangchao.employee.entity.Employee;
 import com.zhangchao.employee.service.EmployeeService;

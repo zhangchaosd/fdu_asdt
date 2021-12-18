@@ -29,11 +29,10 @@ public class UserController {
         return userService.update(user);
     }
 
-    @PostMapping(value = "/test1")
-    public User addNew(@RequestBody User user) {
-        // TODO callback
-        return userService.save(user);
-    }
+    // @PostMapping(value = "/test1")
+    // public User addNew(@RequestBody User user) {
+    //     return userService.save(user);
+    // }
 
     @GetMapping(value = "/users")
     public List<User> findAll() {
