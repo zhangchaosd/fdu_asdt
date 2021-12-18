@@ -3,6 +3,7 @@ package com.zhangchao.taskCompletion.service.impl;
 import org.springframework.stereotype.Service;
 import com.zhangchao.taskCompletion.entity.TaskCompletion;
 import com.zhangchao.taskCompletion.entity.Employee;
+import com.zhangchao.taskCompletion.entity.Task;
 import com.zhangchao.taskCompletion.service.TaskCompletionService;
 
 import javax.annotation.Resource;
@@ -17,13 +18,18 @@ import java.net.MalformedURLException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.client.HttpClient;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.http.util.EntityUtils;
-
+import java.util.HashMap;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.ContentType;
 /**
  * @author zhangchao
  * @date 2021/12/17
@@ -36,32 +42,75 @@ public class TaskCompletionServiceImpl implements TaskCompletionService {
         List<TaskCompletion> ret = new ArrayList<TaskCompletion>();
         try {
             HttpClient client = HttpClients.createDefault();
-            System.out.println("okkkkkkkkkkkk222222222.55555");
-            // HttpGet request = new HttpGet("http://pj_employee-server_1:9999/employees");
             HttpGet request = new HttpGet("http://employee-server:9999/employees");
             request.setHeader("Accept", "application/json");
             HttpResponse response = client.execute(request);
             HttpEntity entity = response.getEntity();
             ObjectMapper mapper = new ObjectMapper();
-            // String resultStr = EntityUtils.toString(entity, "UTF-8");
-            // System.out.println(resultStr);
             List<Employee> employees = mapper.readValue(entity.getContent(), new TypeReference<List<Employee>>() {});
-            for(Employee e : employees) {
+            HashMap<String, Integer> done = new HashMap<String, Integer>();
+            HashMap<String, Integer> total = new HashMap<String, Integer>();
+            for(Employee em : employees) {
+                String department = em.getDepartment();
+                Integer userid = em.getId();
+                boolean completed = getTaskInfo(userid, 1);
+                if(done.containsKey(department)) {
+                    Integer t = done.get(department);
+                    t += 1;
+                    if(completed) {
+                        done.put(department, t);
+                    }
+                    Integer t2 = total.get(department);
+                    t2 += 1;
+                    total.put(department, t2);
+                }
+                else {
+                    if(completed) {
+                        done.put(department, 1);
+                    }
+                    else {
+                        done.put(department, 0);
+                    }
+                    total.put(department, 1);
+                }
+            }
+            for (String dep : done.keySet()) {
                 TaskCompletion tc = new TaskCompletion();
-                tc.setDepartment(e.getDepartment());
+                tc.setDepartment(dep);
+                tc.setCompleted(done.get(dep));
+                tc.setTotal(total.get(dep));
                 ret.add(tc);
             }
-            // String url = "http://pj_employee-server_1:9999/employees";
-            // URL restURL = new URL(url);
-            // HttpURLConnection conn = (HttpURLConnection) restURL.openConnection();
-            // conn.setRequestMethod("GET"); // POST GET PUT DELETE
-            // conn.setRequestProperty("Accept", "application/json");
-            // BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            // String line;
-            // while((line = br.readLine()) != null ){
-            //     System.out.println(line);
-            // }
-            // br.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    private boolean getTaskInfo(Integer userid, Integer category) {
+        boolean ret = false;
+        try {
+            Task task = new Task();
+            task.setTaskid(1);
+            task.setUserid(userid);
+            task.setCategory(category);
+            HttpClient client = HttpClients.createDefault();
+            HttpPost request = new HttpPost("http://task-server:9997/gettasksbyuseridandcategory");
+            // request.addHeader("Content-Type", "application/json");
+            String ts = JSONObject.toJSONString(task);
+            // String ts2 = JSON.toJSON(task);
+            System.out.println(ts);
+            // System.out.println(ts2);
+            StringEntity requestentity = new StringEntity(ts);
+            requestentity.setContentType(ContentType.APPLICATION_JSON.toString());
+            request.setEntity(requestentity);
+            HttpResponse response2 = client.execute(request);
+            HttpEntity entity = response2.getEntity();
+            ObjectMapper mapper = new ObjectMapper();
+            Task tc = mapper.readValue(entity.getContent(), Task.class);
+            ret = tc.getCompleted();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
