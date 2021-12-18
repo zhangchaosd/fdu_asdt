@@ -8,11 +8,11 @@
         <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>top.xywu</groupId>
-    <artifactId>student</artifactId>
+    <groupId>com.zhangchao</groupId>
+    <artifactId>taskCompletion</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>student</name>
-    <description>the description for student</description>
+    <name>taskCompletion</name>
+    <description>the description for taskCompletion</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -39,6 +39,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.13</version>
         </dependency>
     </dependencies>
 

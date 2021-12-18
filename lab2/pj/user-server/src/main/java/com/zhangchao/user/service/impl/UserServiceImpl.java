@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setId(Integer.parseInt(id));
         user.setPassword(getPsw(8));
+        //TODO send EMAIL
         return userRepository.save(user);
     }
 
