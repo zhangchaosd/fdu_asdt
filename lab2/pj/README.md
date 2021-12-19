@@ -36,3 +36,8 @@ docker-compose up -d
 ~~~
 docker-compose down
 ~~~
+
+## 测试
+
+要使用 testREST.txt 文件进行测试，需要安装 vscode 插件 REST Client。
+或者用 postman 测试。
