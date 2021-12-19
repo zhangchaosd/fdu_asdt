@@ -29,7 +29,7 @@ public class TaskController {
 
     @PostMapping(value = "/gettasksbyuseridandcategory")
     public List<Task> getTasksByUseridAndCategory(@RequestBody Task task) {
-        return taskService.findByUseridAndCategory(task.getUserid(), task.getUserid());
+        return taskService.findByUseridAndCategory(task.getUserid(), task.getCategory());
     }
 
     @GetMapping(value = "/tasks") //TODO delete

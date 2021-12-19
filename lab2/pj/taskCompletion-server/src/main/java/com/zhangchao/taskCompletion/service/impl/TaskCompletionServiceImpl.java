@@ -48,12 +48,13 @@ public class TaskCompletionServiceImpl implements TaskCompletionService {
             HttpEntity entity = response.getEntity();
             ObjectMapper mapper = new ObjectMapper();
             List<Employee> employees = mapper.readValue(entity.getContent(), new TypeReference<List<Employee>>() {});
+
             HashMap<String, Integer> done = new HashMap<String, Integer>();
             HashMap<String, Integer> total = new HashMap<String, Integer>();
             for(Employee em : employees) {
                 String department = em.getDepartment();
                 Integer userid = em.getId();
-                boolean completed = getTaskInfo(userid, 1);
+                boolean completed = getTaskInfo(userid, 1); ////1 表示任务类别，用个宏定义更好
                 if(done.containsKey(department)) {
                     Integer t = done.get(department);
                     t += 1;
@@ -98,19 +99,15 @@ public class TaskCompletionServiceImpl implements TaskCompletionService {
             task.setCategory(category);
             HttpClient client = HttpClients.createDefault();
             HttpPost request = new HttpPost("http://task-server:9997/gettasksbyuseridandcategory");
-            // request.addHeader("Content-Type", "application/json");
             String ts = JSONObject.toJSONString(task);
-            // String ts2 = JSON.toJSON(task);
-            System.out.println(ts);
-            // System.out.println(ts2);
             StringEntity requestentity = new StringEntity(ts);
             requestentity.setContentType(ContentType.APPLICATION_JSON.toString());
             request.setEntity(requestentity);
             HttpResponse response2 = client.execute(request);
             HttpEntity entity = response2.getEntity();
             ObjectMapper mapper = new ObjectMapper();
-            Task tc = mapper.readValue(entity.getContent(), Task.class);
-            ret = tc.getCompleted();
+            List<Task> tcs = mapper.readValue(entity.getContent(), new TypeReference<List<Task>>() {});
+            ret = tcs.get(0).getCompleted();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
