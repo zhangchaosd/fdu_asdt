@@ -1,6 +1,5 @@
 package com.zhangchao.user.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.zhangchao.user.entity.User;
 import com.zhangchao.user.entity.Result;
@@ -28,11 +27,6 @@ public class UserController {
     public User changePassword(@RequestBody User user) {
         return userService.update(user);
     }
-
-    // @PostMapping(value = "/test1")
-    // public User addNew(@RequestBody User user) {
-    //     return userService.save(user);
-    // }
 
     @GetMapping(value = "/users")
     public List<User> findAll() {

@@ -7,6 +7,10 @@ import com.zhangchao.user.service.UserService;
 
 import javax.annotation.Resource;
 
+/**
+ * @author zhangchao
+ * @date 2021/12/18
+ */
 @Service
 public class KafkaListenerService {
     @Resource

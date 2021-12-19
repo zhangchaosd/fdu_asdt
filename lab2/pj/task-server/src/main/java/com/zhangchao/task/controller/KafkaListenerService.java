@@ -3,11 +3,14 @@ package com.zhangchao.task.controller;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import com.zhangchao.task.entity.Task;
 import com.zhangchao.task.service.TaskService;
 
 import javax.annotation.Resource;
 
+/**
+ * @author zhangchao
+ * @date 2021/12/17
+ */
 @Service
 public class KafkaListenerService {
     @Resource

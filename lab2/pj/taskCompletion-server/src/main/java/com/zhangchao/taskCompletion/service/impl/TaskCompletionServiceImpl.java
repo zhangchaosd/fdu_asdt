@@ -6,33 +6,27 @@ import com.zhangchao.taskCompletion.entity.Employee;
 import com.zhangchao.taskCompletion.entity.Task;
 import com.zhangchao.taskCompletion.service.TaskCompletionService;
 
-import javax.annotation.Resource;
-import java.util.List;
 import java.util.ArrayList;
-import java.net.URL;
-import java.net.HttpURLConnection;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.client.HttpClient;
-import com.fasterxml.jackson.core.type.TypeReference;
-import org.apache.http.util.EntityUtils;
-import java.util.HashMap;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSON;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.ContentType;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * @author zhangchao
- * @date 2021/12/17
+ * @date 2021/12/19
  */
 @Service
 public class TaskCompletionServiceImpl implements TaskCompletionService {

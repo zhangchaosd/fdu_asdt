@@ -1,16 +1,12 @@
 package com.zhangchao.task.service.impl;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.zhangchao.task.entity.Task;
-// import com.zhangchao.task.entity.Result;
 import com.zhangchao.task.repository.TaskRepository;
 import com.zhangchao.task.service.TaskService;
 
 import javax.annotation.Resource;
 import java.util.List;
-// import java.util.Optional;
 
 /**
  * @author zhangchao
