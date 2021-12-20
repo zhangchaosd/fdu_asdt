@@ -27,12 +27,12 @@ public class EmployeeController {
         return employeeService.findAll();
     }
 
-    @PostMapping(value = "/getemployeebyid")
+    @PostMapping(value = "/getEmployeeById")
     public Employee findById(@RequestBody Employee employee) {
         return employeeService.findById(employee.getId());
     }
 
-    @PostMapping(value = "/getemployeebyname")
+    @PostMapping(value = "/getEmployeeByName")
     public List<Employee> findByName(@RequestBody Employee employee) {
         return employeeService.findByName(employee.getName());
     }
@@ -42,8 +42,8 @@ public class EmployeeController {
         return employeeService.findByDepartment(employee.getDepartment());
     }
 
-    @PostMapping(value = "/editemployee")
-    public Employee editemployee(@RequestBody Employee employee) {
+    @PostMapping(value = "/editEmployee")
+    public Employee editEmployee(@RequestBody Employee employee) {
         return employeeService.update(employee);
     }
 }

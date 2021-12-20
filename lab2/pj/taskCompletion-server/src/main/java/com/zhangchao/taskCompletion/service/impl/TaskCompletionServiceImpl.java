@@ -92,7 +92,7 @@ public class TaskCompletionServiceImpl implements TaskCompletionService {
             task.setUserid(userid);
             task.setCategory(category);
             HttpClient client = HttpClients.createDefault();
-            HttpPost request = new HttpPost("http://task-server:9997/gettasksbyuseridandcategory");
+            HttpPost request = new HttpPost("http://task-server:9997/getTasksByUseridAndCategory");
             String ts = JSONObject.toJSONString(task);
             StringEntity requestentity = new StringEntity(ts);
             requestentity.setContentType(ContentType.APPLICATION_JSON.toString());

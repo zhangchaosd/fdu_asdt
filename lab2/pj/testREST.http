@@ -23,15 +23,15 @@ POST http://localhost:9999/employees
 content-type: application/json
 
 {
-    "id": 2,
-    "name": "name2",
+    "id": 4,
+    "name": "name4",
     "department": "d2"
 }
 
 
 ### 根据 name 查询员工信息
-### curl -Uri "http://localhost:9999/getemployeebyname" -Method Post -ContentType 'application/json' -Body '{"id": -1,"name": "name1", "department": ""}'
-POST http://localhost:9999/getemployeebyname
+### curl -Uri "http://localhost:9999/getEmployeeByName" -Method Post -ContentType 'application/json' -Body '{"id": -1,"name": "name1", "department": ""}'
+POST http://localhost:9999/getEmployeeByName
 content-type: application/json
 
 {
@@ -42,8 +42,8 @@ content-type: application/json
 
 
 ### 根据 id工号 查询员工信息
-### curl -Uri "http://localhost:9999/getemployeebyid" -Method Post -ContentType 'application/json' -Body '{"id": 1,"name": "", "department": ""}'
-POST http://localhost:9999/getemployeebyid
+### curl -Uri "http://localhost:9999/getEmployeeById" -Method Post -ContentType 'application/json' -Body '{"id": 1,"name": "", "department": ""}'
+POST http://localhost:9999/getEmployeeById
 content-type: application/json
 
 {
@@ -54,8 +54,8 @@ content-type: application/json
 
 
 ### 更新员工信息，以 id工号 为标识
-### curl -Uri "http://localhost:9999/editemployee" -Method Post -ContentType 'application/json' -Body '{"id": 1,"name": "newname1", "department": "newdepartment"}'
-POST http://localhost:9999/editemployee
+### curl -Uri "http://localhost:9999/editEmployee" -Method Post -ContentType 'application/json' -Body '{"id": 1,"name": "newname1", "department": "newdepartment"}'
+POST http://localhost:9999/editEmployee
 content-type: application/json
 
 {
@@ -80,17 +80,17 @@ POST http://localhost:9998/login
 content-type: application/json
 
 {
-    "id": 1,
-    "password": "KU&)hO@Z1"
+    "id": 2,
+    "password": "qyBHVT@x1"
 }
 
 ### 更改用户密码
-### curl -Uri "http://localhost:9998/changepassword" -Method Post -ContentType 'application/json' -Body '{"id": 1,"password": "newpwd"}'
-POST http://localhost:9998/changepassword
+### curl -Uri "http://localhost:9998/changePassword" -Method Post -ContentType 'application/json' -Body '{"id": 1,"password": "newpwd"}'
+POST http://localhost:9998/changePassword
 content-type: application/json
 
 {
-    "id": 1,
+    "id": 2,
     "password": "newpwd"
 }
 
@@ -115,20 +115,20 @@ content-type: application/json
 GET http://localhost:9997/tasks
 
 ### 获取一个用户的是所有任务
-### curl -Uri "http://localhost:9997/gettasksbyuserid" -Method Post -ContentType 'application/json' -Body '{"taskid": -1, "userid": "1", "category": "-10", "completed": true}'
-POST http://localhost:9997/gettasksbyuserid
+### curl -Uri "http://localhost:9997/getTasksByUserid" -Method Post -ContentType 'application/json' -Body '{"taskid": -1, "userid": "1", "category": "-10", "completed": true}'
+POST http://localhost:9997/getTasksByUserid
 content-type: application/json
 
 {
     "taskid":-10,
-    "userid":1,
+    "userid":2,
     "category":-10,
     "completed":true
 }
 
 ### 根据 category 获取某一类任务
-### curl -Uri "http://localhost:9997/gettasksbycategory" -Method Post -ContentType 'application/json' -Body '{"taskid": -1, "userid": "-1", "category": "1", "completed": true}'
-POST http://localhost:9997/gettasksbycategory
+### curl -Uri "http://localhost:9997/getTasksByCategory" -Method Post -ContentType 'application/json' -Body '{"taskid": -1, "userid": "-1", "category": "1", "completed": true}'
+POST http://localhost:9997/getTasksByCategory
 content-type: application/json
 
 {
@@ -139,8 +139,8 @@ content-type: application/json
 }
 
 ### 根据 工号 和 category 获取某些任务
-### curl -Uri "http://localhost:9997/gettasksbyuseridandcategory" -Method Post -ContentType 'application/json' -Body '{"taskid": -1, "userid": "1", "category": "1", "completed": true}'
-POST http://localhost:9997/gettasksbyuseridandcategory
+### curl -Uri "http://localhost:9997/getTasksByUseridAndCategory" -Method Post -ContentType 'application/json' -Body '{"taskid": -1, "userid": "1", "category": "1", "completed": true}'
+POST http://localhost:9997/getTasksByUseridAndCategory
 content-type: application/json
 
 {
@@ -168,5 +168,5 @@ content-type: application/json
 ######
 
 ### 获取所有部门任务完成情况
-### curl -Uri "http://localhost:9996/gettaskcompletions" -Method Get
-GET http://localhost:9996/gettaskcompletions
+### curl -Uri "http://localhost:9996/getTaskCompletions" -Method Get
+GET http://localhost:9996/getTaskCompletions

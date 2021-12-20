@@ -17,17 +17,17 @@ public class TaskController {
     @Resource
     TaskService taskService;
 
-    @PostMapping(value = "/gettasksbyuserid")
+    @PostMapping(value = "/getTasksByUserid")
     public List<Task> getTasksByUserid(@RequestBody Task task) {
         return taskService.findByUserid(task.getUserid());
     }
 
-    @PostMapping(value = "/gettasksbycategory")
+    @PostMapping(value = "/getTasksByCategory")
     public List<Task> getTasksByCategory(@RequestBody Task task) {
         return taskService.findByCategory(task.getCategory());
     }
 
-    @PostMapping(value = "/gettasksbyuseridandcategory")
+    @PostMapping(value = "/getTasksByUseridAndCategory")
     public List<Task> getTasksByUseridAndCategory(@RequestBody Task task) {
         return taskService.findByUseridAndCategory(task.getUserid(), task.getCategory());
     }

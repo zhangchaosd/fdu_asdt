@@ -23,7 +23,7 @@ public class UserController {
         return userService.login(user);
     }
 
-    @PostMapping(value = "/changepassword")
+    @PostMapping(value = "/changePassword")
     public User changePassword(@RequestBody User user) {
         return userService.update(user);
     }

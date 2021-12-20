@@ -17,7 +17,7 @@ public class TaskCompletionController {
     @Resource
     TaskCompletionService taskCompletionService;
 
-    @GetMapping(value = "/gettaskcompletions")
+    @GetMapping(value = "/getTaskCompletions")
     public List<TaskCompletion> getTaskCompletions() {
         return taskCompletionService.getTaskCompletions();
     }
