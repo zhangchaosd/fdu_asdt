@@ -23,9 +23,9 @@ POST http://localhost:9999/employees
 content-type: application/json
 
 {
-    "id": 6,
-    "name": "name6",
-    "department": "d1"
+    "id": 2,
+    "name": "name2",
+    "department": "d2"
 }
 
 
