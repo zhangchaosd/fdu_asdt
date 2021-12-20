@@ -74,7 +74,7 @@ content-type: application/json
 
 {
     "id": 1,
-    "password": "KRZLQlU$"
+    "password": "KU&)hO@Z1"
 }
 
 ### 更改用户密码
@@ -83,7 +83,7 @@ content-type: application/json
 
 {
     "id": 1,
-    "password": "a?E&^sSv)"
+    "password": "001"
 }
 
 
