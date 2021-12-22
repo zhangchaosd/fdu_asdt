@@ -9,7 +9,7 @@
 
 ## 3. 项目运行
 
-
+此项目在 Windows 环境下开发测试，M1 mac 运行好像会有问题。
 启动之前需要先打包好各个服务，电脑需要安装 maven：
 ~~~
 mvn clean package
