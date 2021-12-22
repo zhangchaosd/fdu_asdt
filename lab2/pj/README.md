@@ -38,3 +38,6 @@ docker-compose down
 部分代码：
 <img src="assets/getTaskCompletion.png" >
 <img src="assets/getTaskInfo.png" >
+
+## 6. 仓库地址
+https://github.com/zhangchaosd/fdu_asdt/tree/main/lab2
