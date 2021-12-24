@@ -8,6 +8,8 @@ services:
       - 3307:3306
     networks:
       - mynetwork
+    volumes:
+      - employee-data:/var/lib/mysql
 
   employee-server:
     depends_on:
@@ -31,6 +33,8 @@ services:
       - 3308:3306
     networks:
       - mynetwork
+    volumes:
+      - user-data:/var/lib/mysql
 
   user-server:
     depends_on:
@@ -54,6 +58,8 @@ services:
       - 3309:3306
     networks:
       - mynetwork
+    volumes:
+      - task-data:/var/lib/mysql
 
   task-server:
     depends_on:
@@ -120,3 +126,8 @@ services:
 
 networks:
   mynetwork: {}
+
+volumes:
+  employee-data: {}
+  user-data: {}
+  task-data: {}
